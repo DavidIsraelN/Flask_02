@@ -1,5 +1,5 @@
 from typing import Counter
-from app.repositories.prize_repository import fetch_prize_data
+from app.repositories.nobel_repository import fetch_prize_data
 
 
 def get_all_categories():
