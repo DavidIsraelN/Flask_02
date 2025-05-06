@@ -38,3 +38,17 @@ def get_top_category():
     category_counter = Counter(categories)
     top_category = category_counter.most_common(1)
     return top_category[0][0] if top_category else None
+
+
+def get_categories_by_year(year):
+    """
+    Fetches categories for a specific year from the Nobel Prize API.
+    Returns a sorted list of unique categories for that year.
+    """
+    data = fetch_prize_data()
+    categories = {
+        prize['category']
+        for prize in data.get('prizes', [])
+        if prize.get('year') == str(year)
+    }
+    return sorted(categories)
