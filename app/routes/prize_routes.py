@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from app.services.prize_service import get_all_categories, get_all_names
+from app.services.prize_service import get_all_categories, get_all_names, get_top_category
 
 prize_bp = Blueprint('prizes', __name__)
 
@@ -30,3 +30,13 @@ def fetch_names():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+# Route to fetch the top category in the Nobel Prize
+@prize_bp.route('/top-category', methods=['GET'])
+def fetch_top_category():
+    try:
+        top_category = get_top_category()
+        print(f"Fetched top category: {top_category}")  # Debugging line to check fetched top category
+        return jsonify({'top_category': top_category}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
